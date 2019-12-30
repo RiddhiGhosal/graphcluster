@@ -8,5 +8,5 @@
 Contains the functions that are deployed to perform the final clustering.
 }
 \author{
-Riddhi Ghosal, Debajyoti Sinha \email{jojodigi@gmail.com}
+Riddhi Ghosal \email{postboxriddhi@gmail.com}, Debajyoti Sinha \email{jojodigi@gmail.com}
 }
