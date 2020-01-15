@@ -1,7 +1,7 @@
 Package: graphcluster
 Type: Package
 Title: Batch Wise Clustering of High Dimensional Datasets using a Graphical Approach
-Version: 0.1.0
+Version: 1.0.0
 Author: Riddhi Ghosal, Debajyoti Sinha
 Maintainer: Riddhi Ghosal <postboxriddhi@gmail.com>
 Description: The goal of this package is to perform efficient clustering of high dimensional datasets using graph theoretic approach. This pak=ckage contains contains the functions that are deployed to perform the final clustering.
