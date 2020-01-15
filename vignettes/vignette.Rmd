@@ -32,8 +32,8 @@ graphcluster requires inputting the dataset in the form of a dataframe or a matr
 ```{r}
 # Load Data
 # path contains decompressed files 
-load("C:\\Academics\\projects\\ml 2018 s.bandhyopadhyay\\data\\stevequake\\steve_quake.RData")
-ncount=t(ncount)
+#load("C:\\Academics\\projects\\ml 2018 s.bandhyopadhyay\\data\\stevequake\\steve_quake.RData")
+#ncount=t(ncount)
 ```
 ## Pre-processing
 graphcluster uses the same pre-processing technique that was used in dropclust. See: https://github.com/debsin/dropClust/blob/master/vignettes/vignette.Rmd
@@ -41,29 +41,32 @@ graphcluster uses the same pre-processing technique that was used in dropclust. 
 ## Perform clustering parallely
 
 Call the parallel_cluster function with suitable parameters. The following is an example:
-system.time(elist_p<-parallel_cluster(30,50,30,bench_data,0.95))
-
+```{r}
+#system.time(elist_p<-parallel_cluster(30,50,30,bench_data,0.95))
+```
 #After all iterations are over, make graphs for the points that were not sampled even once. A sample code is as follows:
 
-l=length(elist_p)
-sub=as.character("",l*2)
-for(i in 1:l)
-{
-  sub[i]=substring(elist_p[i],1,10)
-  sub[i+l]=substring(elist_p[i],12,21)
-}
-usub=unique(sub)
-if(length(usub)!=nrow(bench_data))
-{
-  reducedbench_data <- bench_data[!(rownames(bench_data) %in% usub),]
-  
-  system.time(elist_p1<-parallel_cluster(1,nrow(reducedbench_data),30,reducedbench_data,0.90))
-  elist_p=append(elist_p,elist_p1)
-  
-}
-elist_p2=append(elist_p,elist_p1)
-# make the final graoh as follows.
-system.time(K<-create_graph_comm(elist_p, ann))
-print(paste("Parallel Time",Sys.time()-s))
+```{r}
+#l=length(elist_p)
+# sub=as.character("",l*2)
+# for(i in 1:l)
+# {
+#   sub[i]=substring(elist_p[i],1,10)
+#   sub[i+l]=substring(elist_p[i],12,21)
+# }
+# usub=unique(sub)
+# if(length(usub)!=nrow(bench_data))
+# {
+#   reducedbench_data <- bench_data[!(rownames(bench_data) %in% usub),]
+#   
+#   system.time(elist_p1<-parallel_cluster(1,nrow(reducedbench_data),30,reducedbench_data,0.90))
+#   elist_p=append(elist_p,elist_p1)
+#   
+# }
+# elist_p2=append(elist_p,elist_p1)
+# # make the final graoh as follows.
+# system.time(K<-create_graph_comm(elist_p, ann))
+# print(paste("Parallel Time",Sys.time()-s))
 ##################
+```
 
