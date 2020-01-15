@@ -4,7 +4,7 @@
 #'
 #' @docType package
 #'
-#' @author Riddhi Ghosal, Debajyoti Sinha \email{jojodigi@gmail.com}
+#' @author Riddhi Ghosal \email{postboxriddhi@gmail.com}, Debajyoti Sinha \email{jojodigi@gmail.com}
 #'
 #' @name graphcluster
 NULL
