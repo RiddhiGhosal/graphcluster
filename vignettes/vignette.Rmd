@@ -44,7 +44,8 @@ Call the parallel_cluster function with suitable parameters. The following is an
 ```{r}
 #system.time(elist_p<-parallel_cluster(30,50,30,bench_data,0.95))
 ```
-#After all iterations are over, make graphs for the points that were not sampled even once. A sample code is as follows:
+# Final Step before merging subgraphs
+After all iterations are over, make graphs for the points that were not sampled even once. A sample code is as follows:
 
 ```{r}
 #l=length(elist_p)
