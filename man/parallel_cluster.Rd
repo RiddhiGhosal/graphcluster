@@ -4,16 +4,16 @@
 \alias{parallel_cluster}
 \title{Creates edge List in Parallel}
 \usage{
-parallel_cluster(mat, nbatches, batch_len, Ngenes, prob = 0.6)
+parallel_cluster(nbatches, batch_len, Ngenes, mat, prob = 0.65)
 }
 \arguments{
-\item{mat}{The preprocessed matrix with geans in each column and samples in every row.}
-
 \item{nbatches}{Number of batches to consider.}
 
 \item{batch_len}{size of each batches}
 
 \item{Ngenes}{Number of genes to consider for each batch}
+
+\item{mat}{The preprocessed matrix with geans in each column and samples in every row.}
 
 \item{prob}{The quantile below which edges are not formed}
 }

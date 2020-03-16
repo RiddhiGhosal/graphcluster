@@ -14,19 +14,16 @@
 #' @importFrom stats quantile dist
 #' @export
 
-parallel_cluster<-function(mat,nbatches,batch_len,Ngenes,prob=0.6){
+parallel_cluster<-function(nbatches,batch_len,Ngenes,mat,prob=0.65){
 
-  # nbatches = 3000
-  # batch_len = 10
-  # Ngenes = 300
   # mat = bench_data
 
 
-  print(paste("Number of cores detected",detectCores()))
+  #print(paste("Number of cores detected",detectCores()))
   # Create cluster with desired number of cores
   #cl <- makeCluster(detectCores()-2)
   # Register cluster
-  registerDoParallel(detectCores()-1)
+  registerDoParallel(2)
 
   getDoParWorkers()
 
@@ -35,7 +32,6 @@ parallel_cluster<-function(mat,nbatches,batch_len,Ngenes,prob=0.6){
   biglist<-foreach(i = 1:nbatches, .combine=list, .inorder=FALSE, .multicombine = TRUE ) %dopar% {
 
     N = ncol(mat)
-
 
     batch_ids = sort(sample(1:dim(mat)[1],batch_len,replace = FALSE))
     batch_mat = as.matrix(mat[batch_ids,sample(1:N,Ngenes)])

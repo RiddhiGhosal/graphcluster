@@ -4,13 +4,14 @@ Title: Batch Wise Clustering of High Dimensional Datasets using a Graphical Appr
 Version: 1.0.0
 Author: Riddhi Ghosal, Debajyoti Sinha
 Maintainer: Riddhi Ghosal <postboxriddhi@gmail.com>
-Description: Perform efficient clustering of high dimensional datasets using graph theoretic approach. Contains contains the functions that are deployed to perform the final clustering.
+Description: Perform efficient clustering of high dimensional datasets using graph theoretic approach. Contains the functions that are deployed to perform the final clustering.
 Imports: data.table,
          parallel,
          foreach,
          doParallel,
          igraph,
-         hash
+         hash,
+         stringr
 License: GPL-3
 URL: https://github.com/Riddhiz/graphcluster
 Encoding: UTF-8

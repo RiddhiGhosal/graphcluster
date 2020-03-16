@@ -23,51 +23,59 @@ This is the first version of the graphcluster package. This vignette provides a 
 
 ```{r, message=FALSE, warning=FALSE}
 library(graphcluster)
-set.seed(0)
+library(stringr)
+library(igraph)
 ```
-## Loading data
+## Loading data and preparing annotations. Use Iris data as the test dataset.
 graphcluster requires inputting the dataset in the form of a dataframe or a matrix
 
 
 ```{r}
-# Load Data
-# path contains decompressed files 
-#load("C:\\Academics\\projects\\ml 2018 s.bandhyopadhyay\\data\\stevequake\\steve_quake.RData")
-#ncount=t(ncount)
+data(iris)
+data=iris[,-5]
+ann=iris[,5]
+names(ann)<-rownames(data)
+f=factor(ann)
+ann=as.numeric(f)
 ```
-## Pre-processing
-graphcluster uses the same pre-processing technique that was used in dropclust. See: https://github.com/debsin/dropClust/blob/master/vignettes/vignette.Rmd
-
 ## Perform clustering parallely
 
 Call the parallel_cluster function with suitable parameters. The following is an example:
 ```{r}
-#system.time(elist_p<-parallel_cluster(30,50,30,bench_data,0.95))
+system.time(elist_p<-parallel_cluster(5,50,4,data,0.65))
 ```
-# Final Step before merging subgraphs
+## Final Step before merging subgraphs
 After all iterations are over, make graphs for the points that were not sampled even once. A sample code is as follows:
 
 ```{r}
-#l=length(elist_p)
-# sub=as.character("",l*2)
-# for(i in 1:l)
-# {
-#   sub[i]=substring(elist_p[i],1,10)
-#   sub[i+l]=substring(elist_p[i],12,21)
-# }
-# usub=unique(sub)
-# if(length(usub)!=nrow(bench_data))
-# {
-#   reducedbench_data <- bench_data[!(rownames(bench_data) %in% usub),]
-#   
-#   system.time(elist_p1<-parallel_cluster(1,nrow(reducedbench_data),30,reducedbench_data,0.90))
-#   elist_p=append(elist_p,elist_p1)
-#   
-# }
-# elist_p2=append(elist_p,elist_p1)
-# # make the final graoh as follows.
-# system.time(K<-create_graph_comm(elist_p, ann))
-# print(paste("Parallel Time",Sys.time()-s))
-##################
+l=length(elist_p)
+l
+sub=as.character("",l*2)
+for(i in 1:l)
+{
+  sub[i]=word(elist_p[i])
+  sub[i+l]=word(elist_p[i],2)
+}
+usub=unique(sub)
+if(length(usub)!=nrow(data))
+{
+  reducedbench_data <- data[!(rownames(data) %in% usub),]
+  
+  system.time(elist_p1<-parallel_cluster(1,nrow(reducedbench_data),4,reducedbench_data,0.65))
+  elist_p=append(elist_p,elist_p1)
+  
+}
+elist_p2=append(elist_p,elist_p1)
+system.time(K<-graphcommunity(elist_p, ann))
 ```
 
+## Plotting the final clustered dataset.
+```{r}
+mygr=K$graph
+table(data.frame("PREDICT" = K$comm$membership,"TRUE" = V(mygr)$color))
+
+V(mygr)$color =  K$comm$membership
+
+set.seed(555)
+
+plot(K$comm,mygr,vertex.size=5, vertex.label=NA,edge.color=NA)
